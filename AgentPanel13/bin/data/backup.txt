@@ -1,0 +1,60 @@
+public static String xml_filePath;
+	static XmlHandler_JAR handler = new XmlHandler_JAR();
+	private static final long serialVersionUID = 1L;
+	public static int cnt = 0;// counter for the agent ids had to be placed here
+	public static int leftCnt = 0;
+	public static int rightCnt = 0;
+	public static int straightCnt = 1;
+	public static int deathCount = 0;
+	public static int currAgent = 0;
+	public static int deathGeoCall = 0;
+	public static String fileName = "";
+	public static String dataFileLoc = "";
+	
+	//variables for the panels
+	public static int totalAgents = handler.getTotalAgents();
+	public static double panelAgentLength=.03;
+	public double panelOffsetZ = .0;
+	
+	public boolean uniformExtrusion = false;
+	public double extrusion = .2;
+	public double shadeVal = 1;
+	public static double panelCollisionClearance=.0099;//was .0099
+	public double genAngle = 2*PI/6;
+	//probabilty for each agent Type at each timestep
+	int probRight = 70;
+	int probLeft = 70;
+	int probStraight = 90;
+	
+	
+	//vars for screenshotting and movie making
+	public int scrnCnt = 0;
+	
+	//vars for windows- Position 
+	public static double w1x;
+	public static double w1y;
+	public static double w1r;
+	public static double w2x;
+	public static double w2y;
+	public static double w2r;
+	
+	//extra variable for window block agent 
+	// number of windows 
+	double windowWidth = 1.4;
+	double windowDepth = 1;
+	double windowHeight = 2;	
+	//the value that changes the probability of the regenerated agents
+	int regenProb=20;
+	//TO do
+	// add here a string variable to add the filepath of where you have located the package, so that all the filepaths are relative to that
+	//location to save the xml with the agents information
+	String agentXmlFileLocation = "C:\\Users\\Evangelos\\Documents\\workspace\\AgentPanel11_Evan\\agents.xml";
+	//location to retrieve input geometry for growing the panels
+	String geoFilePath = "...\\AgentPanel_7\\src\\data\\agents_srf_panel_test02.3dm";
+	
+	
+	// variable for starting regenerating panels
+	int deathCountLimit=10 ;
+	static //How long the IGEO server runs
+	int runDuration=250;
+	

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AgentsList>
+    <Agent/>
+    <Window_1 WLocation="0.2,0.5,1.5"/>
+    <Window_2 WLocation="0.5,0.5,1.5"/>
+    <Agent Location="0.0,0.0,0.045961940777125586,0.045961940777125586,0">
+        <isAlive>1</isAlive>
+        <temGenAngle>π/3</temGenAngle>
+        <totalAgents>10000</totalAgents>
+        <panelAgentLength>0.065</panelAgentLength>
+        <panelOffsetZ>0.0</panelOffsetZ>
+        <uniformExtrusion>true</uniformExtrusion>
+        <extrusion>0.2</extrusion>
+        <shadeVal>1.0</shadeVal>
+        <panelCollisionClearance>0.0099</panelCollisionClearance>
+        <probRight>30.0</probRight>
+        <probLeft>50.0</probLeft>
+        <probStraight>60.0</probStraight>
+    </Agent>
+    <Agent Location="0.045961940777125586,0.045961940777125586,0.02913870101584345,0.10874711899567024,1">
+        <isAlive>1</isAlive>
+        <temGenAngle>π/3</temGenAngle>
+        <totalAgents>10000</totalAgents>
+        <panelAgentLength>0.065</panelAgentLength>
+        <panelOffsetZ>0.0</panelOffsetZ>
+        <uniformExtrusion>true</uniformExtrusion>
+        <extrusion>0.2</extrusion>
+        <shadeVal>1.0</shadeVal>
+        <panelCollisionClearance>0.0099</panelCollisionClearance>
+        <probRight>30.0</probRight>
+        <probLeft>50.0</probLeft>
+        <probStraight>60.0</probStraight>
+    </Agent>
+    <Agent Location="0.045961940777125586,0.045961940777125586,0.10874711899567024,0.02913870101584345,2">
+        <isAlive>1</isAlive>
+        <temGenAngle>π/3</temGenAngle>
+        <totalAgents>10000</totalAgents>
+        <panelAgentLength>0.065</panelAgentLength>
+        <panelOffsetZ>0.0</panelOffsetZ>
+        <uniformExtrusion>true</uniformExtrusion>
+        <extrusion>0.2</extrusion>
+        <shadeVal>1.0</shadeVal>
+        <panelCollisionClearance>0.0099</panelCollisionClearance>
+        <probRight>30.0</probRight>
+        <probLeft>50.0</probLeft>
+        <probStraight>60.0</probStraight>
+    </Agent>
+    <Agent Location="0.045961940777125586,0.045961940777125586,0.09192388155425117,0.09192388155425117,0">
+        <isAlive>1</isAlive>
+        <temGenAngle>π/3</temGenAngle>
+        <totalAgents>10000</totalAgents>
+        <panelAgentLength>0.065</panelAgentLength>
+        <panelOffsetZ>0.0</panelOffsetZ>
+        <uniformExtrusion>true</uniformExtrusion>
+        <extrusion>0.2</extrusion>
+        <shadeVal>1.0</shadeVal>
+        <panelCollisionClearance>0.0099</panelCollisionClearance>
+        <probRight>30.0</probRight>
+        <probLeft>50.0</probLeft>
+        <probStraight>60.0</probStraight>
+    </Agent>
+    <Agent Location="0.10874711899567024,0.02913870101584345,0.17153229721421492,0.012315461254561313,0">
+        <isAlive>1</isAlive>
+        <temGenAngle>π/3</temGenAngle>
+        <totalAgents>10000</totalAgents>
+        <panelAgentLength>0.065</panelAgentLength>
+        <panelOffsetZ>0.0</panelOffsetZ>
+        <uniformExtrusion>true</uniformExtrusion>
+        <extrusion>0.2</extrusion>
+        <shadeVal>1.0</shadeVal>
+        <panelCollisionClearance>0.0099</panelCollisionClearance>
+        <probRight>30.0</probRight>
+        <probLeft>50.0</probLeft>
+        <probStraight>60.0</probStraight>
+    </Agent>
+    <Agent Location="0.09192388155425117,0.09192388155425117,0.15470905977279584,0.07510064179296903,2">
+        <isAlive>1</isAlive>
+        <temGenAngle>π/3</temGenAngle>
+        <totalAgents>10000</totalAgents>
+        <panelAgentLength>0.065</panelAgentLength>
+        <panelOffsetZ>0.0</panelOffsetZ>
+        <uniformExtrusion>true</uniformExtrusion>
+        <extrusion>0.2</extrusion>
+        <shadeVal>1.0</shadeVal>
+        <panelCollisionClearance>0.0099</panelCollisionClearance>
+        <probRight>30.0</probRight>
+        <probLeft>50.0</probLeft>
+        <probStraight>60.0</probStraight>
+    </Agent>
+    <Agent Location="0.09192388155425117,0.09192388155425117,0.13788582233137675,0.13788582233137675,0">
+        <isAlive>1</isAlive>
+        <temGenAngle>π/3</temGenAngle>
+        <totalAgents>10000</totalAgents>
+        <panelAgentLength>0.065</panelAgentLength>
+        <panelOffsetZ>0.0</panelOffsetZ>
+        <uniformExtrusion>true</uniformExtrusion>
+        <extrusion>0.2</extrusion>
+        <shadeVal>1.0</shadeVal>
+        <panelCollisionClearance>0.0099</panelCollisionClearance>
+        <probRight>30.0</probRight>
+        <probLeft>50.0</probLeft>
+        <probStraight>60.0</probStraight>
+    </Agent>
+    <Agent Location="0.13788582233137675,0.13788582233137675,0.12106258257009461,0.20067100054992143,1">
+        <isAlive>1</isAlive>
+        <temGenAngle>π/3</temGenAngle>
+        <totalAgents>10000</totalAgents>
+        <panelAgentLength>0.065</panelAgentLength>
+        <panelOffsetZ>0.0</panelOffsetZ>
+        <uniformExtrusion>true</uniformExtrusion>
+        <extrusion>0.2</extrusion>
+        <shadeVal>1.0</shadeVal>
+        <panelCollisionClearance>0.0099</panelCollisionClearance>
+        <probRight>30.0</probRight>
+        <probLeft>50.0</probLeft>
+        <probStraight>60.0</probStraight>
+    </Agent>
+    <Agent Location="0.13788582233137675,0.13788582233137675,0.18384776310850234,0.18384776310850234,0">
+        <isAlive>1</isAlive>
+        <temGenAngle>π/3</temGenAngle>
+        <totalAgents>10000</totalAgents>
+        <panelAgentLength>0.065</panelAgentLength>
+        <panelOffsetZ>0.0</panelOffsetZ>
+        <uniformExtrusion>true</uniformExtrusion>
+        <extrusion>0.2</extrusion>
+        <shadeVal>1.0</shadeVal>
+        <panelCollisionClearance>0.0099</panelCollisionClearance>
+        <probRight>30.0</probRight>
+        <probLeft>50.0</probLeft>
+        <probStraight>60.0</probStraight>
+    </Agent>
+    <Agent Location="0.12106258257009461,0.20067100054992143,0.0582774028808158,0.21749423482234867,1">
+        <isAlive>1</isAlive>
+        <temGenAngle>π/3</temGenAngle>
+        <totalAgents>10000</totalAgents>
+        <panelAgentLength>0.065</panelAgentLength>
+        <panelOffsetZ>0.0</panelOffsetZ>
+        <uniformExtrusion>true</uniformExtrusion>
+        <extrusion>0.2</extrusion>
+        <shadeVal>1.0</shadeVal>
+        <panelCollisionClearance>0.0099</panelCollisionClearance>
+        <probRight>30.0</probRight>
+        <probLeft>50.0</probLeft>
+        <probStraight>60.0</probStraight>
+    </Agent>
+    <Agent Location="0.0582774028808158,0.21749423482234867,0.01231546612181103,0.17153229002710263,1">
+        <isAlive>1</isAlive>
+        <temGenAngle>π/3</temGenAngle>
+        <totalAgents>10000</totalAgents>
+        <panelAgentLength>0.065</panelAgentLength>
+        <panelOffsetZ>0.0</panelOffsetZ>
+        <uniformExtrusion>true</uniformExtrusion>
+        <extrusion>0.2</extrusion>
+        <shadeVal>1.0</shadeVal>
+        <panelCollisionClearance>0.0099</panelCollisionClearance>
+        <probRight>30.0</probRight>
+        <probLeft>50.0</probLeft>
+        <probStraight>60.0</probStraight>
+    </Agent>
+</AgentsList>
