@@ -1,6 +1,8 @@
 package AgentPanel13_GUI;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,8 +20,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import AgentPanel13_GUI.systemVariablesClass.guiVariableTypes;
+
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -31,13 +36,17 @@ import javax.swing.filechooser.*;
 
 
 public class AgentPanel12_GUI_Alan {
-	static JPanel systemPanel;
-	static JPanel xmlPanel;
-	static JPanel graphPanel;
-	static JPanel xmlVariablePanel;
-	static JPanel messagePanel;
-	static JPanel geometryPanel;
-	static JPanel plotPanel;
+	private static JFrame mainFrame;
+	
+	private static JPanel largeSystemPanel;
+	private static JPanel largeXmlPanel;
+	private static JPanel largeGraphPanel;
+	
+	private static JPanel xmlVariablePanel;
+	private static JPanel messagePanel;
+	private static JPanel geometryPanel;
+	private static JPanel plotPanel;
+	private static JTextArea jtaMessages;
 	
 	public static void main(String[] args){
 		/*
@@ -48,7 +57,7 @@ public class AgentPanel12_GUI_Alan {
 		 * -	The right one, (2), contains top a panel for the jar generation, and the bottom a panel for the plots.
 		 * 
 		 */
-		JFrame mainFrame= new JFrame("AnyAgentFrame");		
+		mainFrame= new JFrame("AnyAgentFrame");		
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setLayout(new GridBagLayout());		
 				
@@ -56,58 +65,104 @@ public class AgentPanel12_GUI_Alan {
 		initializeXmlPanel();
 		initializeGraphPanel();
 		
-		addGBCComponent(mainFrame, systemPanel, 0,0,1,1);		
-		addGBCComponent(mainFrame, xmlPanel, 1,0,1,1);
-		addGBCComponent(mainFrame, graphPanel, 2,0,1,1);
+		Constants.addGBCComponent(mainFrame, largeSystemPanel, 0,0,1,1);		
+		Constants.addGBCComponent(mainFrame, largeXmlPanel, 1,0,1,1);
+		Constants.addGBCComponent(mainFrame, largeGraphPanel, 2,0,1,1);
 		
 		mainFrame.pack();
 		mainFrame.setSize(new Dimension(800,600));
 		mainFrame.setVisible(true);
+		
+		for (int x =0; x< 100; x++){
+			addMessage("hue hue hues " + x);
+		}
 	}		
 	
 	public static JPanel initializeSystemPanel(){
-		systemPanel= new JPanel();	
-		return systemPanel;
+		largeSystemPanel= new JPanel();	
+		//systemPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		largeSystemPanel.setLayout(new BorderLayout());
+		Constants.addSetBorderLayoutTitle(largeSystemPanel, "System Variables", true);
+		
+		//JPanel systemPanelCanvas= new JPanel();
+
+		JPanel jpScrollPanePanel= new JPanel();		
+		jpScrollPanePanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		JScrollPane jspSystemScrollPane= new JScrollPane(jpScrollPanePanel);
+		jspSystemScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		jspSystemScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		largeSystemPanel.add(jspSystemScrollPane, BorderLayout.CENTER);
+		jpScrollPanePanel.setLayout(new GridBagLayout());
+		systemVariablesClass svc= new systemVariablesClass();
+		
+		for (int n =0 ; n < svc.variables.size(); n++){
+			nameToVariableClass nvc = svc.variables.get(n);
+			guiVariableTypes gvType= nvc.gvt;	
+			Constants.addGBCComponent(jpScrollPanePanel, svc.getPanel(nvc.name, gvType), 0,n,0.25,1);
+			//System.out.println(n+ " Name: " + nvc.name + ", type: "+ gvType.toString());
+		}		
+		
+		return largeSystemPanel;
 	}
 	
 	public static JPanel initializeXmlPanel(){
-		xmlPanel= new JPanel();
-		xmlPanel.setBackground(new Color(200,200,200));			
-		xmlPanel.setLayout(new GridBagLayout());
+		//setting up outside panel
+		largeXmlPanel= new JPanel();
+		largeXmlPanel.setBackground(new Color(200,200,200));			
+		largeXmlPanel.setLayout(new GridBagLayout());
+		largeXmlPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		xmlVariablePanel= new JPanel();
-		messagePanel= new JPanel();
-		xmlVariablePanel.setBorder(BorderFactory.createLineBorder(Color.black));
-		messagePanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		Constants.addSetBorderLayoutTitle(xmlVariablePanel, "Xml Variables", true);
 		
-		addGBCComponent(xmlPanel, xmlVariablePanel, 0,0,1,1);
-		addGBCComponent(xmlPanel, messagePanel, 0,1,1,1);
-		return xmlPanel;
+		messagePanel= new JPanel();
+								
+		jtaMessages = new JTextArea();
+		jtaMessages.setWrapStyleWord(true);
+		jtaMessages.setLineWrap(true);
+		jtaMessages.setBorder(new EmptyBorder(10, 10, 10, 10));
+		JScrollPane jspMessages= new JScrollPane(jtaMessages);				
+		jspMessages.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		jspMessages.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		Constants.addSetBorderLayoutTitle(messagePanel, "Messages", true);
+		messagePanel.add(jspMessages, BorderLayout.CENTER);
+		
+		Constants.addGBCComponent(largeXmlPanel, xmlVariablePanel, 0,0,1,1);
+		Constants.addGBCComponent(largeXmlPanel, messagePanel, 0,1,1,1);
+		return largeXmlPanel;
 	}
 	
 	public static JPanel initializeGraphPanel(){
-		graphPanel= new JPanel();
-		graphPanel.setLayout(new GridBagLayout());
+		largeGraphPanel= new JPanel();
+		largeGraphPanel.setLayout(new GridBagLayout());
+		//graphPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		geometryPanel= new JPanel();		
+		geometryPanel= new JPanel();	
+		Constants.addSetBorderLayoutTitle(geometryPanel, "Geometry Pane", true);
+		//geometryPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		
 		plotPanel= new JPanel();
-		geometryPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-		plotPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		Constants.addSetBorderLayoutTitle(plotPanel, "Plot Pane", true);
+		//plotPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		addGBCComponent(graphPanel, geometryPanel, 0,0,1,1);
-		addGBCComponent(graphPanel, plotPanel, 0,1,1,1);
-		return graphPanel;
+		Constants.addGBCComponent(largeGraphPanel, geometryPanel, 0,0,1,1);
+		Constants.addGBCComponent(largeGraphPanel, plotPanel, 0,1,1,1);
+		return largeGraphPanel;
 	}
 	
-	public static void addGBCComponent(Container parent, Container child, int x, int y, double weightX, double weightY){
-		//GridBagLayout gbl= new GridBagLayout();
-		//parent.setLayout(gbl);		
-		GridBagConstraints gbc= new GridBagConstraints();	
-		gbc.gridy= y;
-		gbc.gridx= x;		
-		gbc.weightx= weightX;
-		gbc.weighty= weightY;
-		gbc.fill= GridBagConstraints.BOTH;		
-		parent.add(child, gbc);
-	}
+	public static void addMessage(String message){
+		if (jtaMessages!= null){
+			Calendar cal = Calendar.getInstance();
+			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+			//System.out.println( sdf.format(cal.getTime()) );
+			jtaMessages.append("["+sdf.format(cal.getTime()) +"]  "+ message+"\n");
+			jtaMessages.setCaretPosition(jtaMessages.getDocument().getLength());
+			//mainFrame.repaint();
+			jtaMessages.repaint();
+		}else{
+			System.out.println("JTA Messages is null");
+		}
+	}	
 }
