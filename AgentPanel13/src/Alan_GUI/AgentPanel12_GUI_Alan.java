@@ -96,13 +96,16 @@ public class AgentPanel12_GUI_Alan {
 		largeSystemPanel.add(jspSystemScrollPane, BorderLayout.CENTER);
 		jpScrollPanePanel.setLayout(new GridBagLayout());
 		SystemVariablesClass svc= new SystemVariablesClass();
-		
+			
 		for (int n =0 ; n < svc.variables.size(); n++){
 			NameToVariableClass nvc = svc.variables.get(n);
 			guiVariableTypes gvType= nvc.gvt;	
 			Constants.addGBCComponent(jpScrollPanePanel, svc.getPanel(nvc.name, gvType), 0,n,0.25,1);
 			//System.out.println(n+ " Name: " + nvc.name + ", type: "+ gvType.toString());
-		}		
+		}
+		
+		JButton runButton= new JButton("Run");
+		Constants.addGBCComponent(jpScrollPanePanel, runButton, 0, svc.variables.size() ,0.25,1);
 		
 		return largeSystemPanel;
 	}
