@@ -1,7 +1,8 @@
-package AgentPanel13_GUI;
+package Alan_GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 
 import javax.swing.JTextField;
@@ -16,6 +17,8 @@ public class Constants {
 			titleString= titleString.toUpperCase();
 		}
 		JTextField jtfTitle= new JTextField(titleString);
+		Font font= new Font(jtfTitle.getText(), Font.BOLD,12);		
+		jtfTitle.setFont(font);
 		jtfTitle.setEditable(false);
 		parent.add(jtfTitle, BorderLayout.NORTH);
 	}

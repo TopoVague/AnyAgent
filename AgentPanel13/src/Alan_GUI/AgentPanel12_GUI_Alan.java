@@ -1,4 +1,4 @@
-package AgentPanel13_GUI;
+package Alan_GUI;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -20,7 +20,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import AgentPanel13_GUI.systemVariablesClass.guiVariableTypes;
+import Alan_GUI.SystemVariablesClass.guiVariableTypes;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -70,11 +70,12 @@ public class AgentPanel12_GUI_Alan {
 		Constants.addGBCComponent(mainFrame, largeGraphPanel, 2,0,1,1);
 		
 		mainFrame.pack();
-		mainFrame.setSize(new Dimension(800,600));
+		mainFrame.setSize(new Dimension(1280,720));
+		mainFrame.setMinimumSize(mainFrame.getSize() );
 		mainFrame.setVisible(true);
 		
 		for (int x =0; x< 100; x++){
-			addMessage("hue hue hues " + x);
+			addMessage("Testing " + x);
 		}
 	}		
 	
@@ -94,10 +95,10 @@ public class AgentPanel12_GUI_Alan {
 		
 		largeSystemPanel.add(jspSystemScrollPane, BorderLayout.CENTER);
 		jpScrollPanePanel.setLayout(new GridBagLayout());
-		systemVariablesClass svc= new systemVariablesClass();
+		SystemVariablesClass svc= new SystemVariablesClass();
 		
 		for (int n =0 ; n < svc.variables.size(); n++){
-			nameToVariableClass nvc = svc.variables.get(n);
+			NameToVariableClass nvc = svc.variables.get(n);
 			guiVariableTypes gvType= nvc.gvt;	
 			Constants.addGBCComponent(jpScrollPanePanel, svc.getPanel(nvc.name, gvType), 0,n,0.25,1);
 			//System.out.println(n+ " Name: " + nvc.name + ", type: "+ gvType.toString());
@@ -159,8 +160,7 @@ public class AgentPanel12_GUI_Alan {
 			//System.out.println( sdf.format(cal.getTime()) );
 			jtaMessages.append("["+sdf.format(cal.getTime()) +"]  "+ message+"\n");
 			jtaMessages.setCaretPosition(jtaMessages.getDocument().getLength());
-			//mainFrame.repaint();
-			jtaMessages.repaint();
+			mainFrame.repaint();
 		}else{
 			System.out.println("JTA Messages is null");
 		}
