@@ -23,7 +23,7 @@ public class Constants {
 		parent.add(jtfTitle, BorderLayout.NORTH);
 	}
 	
-	public static void addGBCComponent(Container parent, Container child, int x, int y, double weightX, double weightY){
+	public static Container addGBCComponent(Container parent, Container child, int x, int y, double weightX, double weightY){
 		//GridBagLayout gbl= new GridBagLayout();
 		//parent.setLayout(gbl);
 		GridBagConstraints gbc= new GridBagConstraints();	
@@ -33,9 +33,10 @@ public class Constants {
 		gbc.weighty= weightY;
 		gbc.fill= GridBagConstraints.BOTH;		
 		parent.add(child, gbc);
+		return child;
 	}
 	
-	public static void addGBCComponent(Container parent, Container child, int x, int y, double weightX, double weightY, int fill){
+	public static Container addGBCComponent(Container parent, Container child, int x, int y, double weightX, double weightY, int fill){
 		//GridBagLayout gbl= new GridBagLayout();
 		//parent.setLayout(gbl);
 		GridBagConstraints gbc= new GridBagConstraints();	
@@ -46,9 +47,10 @@ public class Constants {
 		//gbc.fill= GridBagConstraints.BOTH;
 		gbc.fill= fill;
 		parent.add(child, gbc);
+		return child;
 	}
 	
-	public static void addGBCComponent(Container parent, Container child, int x, int y, double weightX, double weightY, int fill, int anchor){
+	public static Container addGBCComponent(Container parent, Container child, int x, int y, double weightX, double weightY, int fill, int anchor){
 		//GridBagLayout gbl= new GridBagLayout();
 		//parent.setLayout(gbl);
 		GridBagConstraints gbc= new GridBagConstraints();	
@@ -60,5 +62,6 @@ public class Constants {
 		gbc.fill= fill;
 		gbc.anchor= GridBagConstraints.NORTH;
 		parent.add(child, gbc);
+		return child;
 	}
 }

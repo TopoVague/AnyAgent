@@ -98,10 +98,11 @@ public class AgentPanel12_GUI_Alan {
 		jpScrollPanePanel.setLayout(new GridBagLayout());
 		SystemVariablesClass svc = new SystemVariablesClass();
 
-		for (int n = 0; n < svc.variables.size(); n++) {
-			NameToVariableClass nvc = svc.variables.get(n);
+		for (int n = 0; n < svc.variablesOrder.size(); n++) {
+			//NameToVariableClass nvc = svc.variables.get(n);
+			NameToVariableClass nvc= svc.variableSet.get(svc.variablesOrder.get(n));
 			guiVariableTypes gvType = nvc.gvt;
-			Constants.addGBCComponent(jpScrollPanePanel, svc.getPanel(nvc.name, gvType), 0, n, 0, 1,
+			Constants.addGBCComponent(jpScrollPanePanel, svc.getPanel(svc.variablesOrder.get(n), gvType), 0, n, 0, 1,
 					GridBagConstraints.HORIZONTAL);
 			// System.out.println(n+ " Name: " + nvc.name + ", type: "+
 			// gvType.toString());
@@ -116,12 +117,12 @@ public class AgentPanel12_GUI_Alan {
 				if (svc.canRun()) {
 					addMessage("Variables checked out. Starting run...");
 				}
-
+				addMessageReportLine();
 				addMessage("Run ended");
 			}
 		});
 		// runButton.setEnabled(false);
-		Constants.addGBCComponent(jpScrollPanePanel, runButton, 0, svc.variables.size(), 0.25, 1,
+		Constants.addGBCComponent(jpScrollPanePanel, runButton, 0, svc.variablesOrder.size(), 0.25, 1,
 				GridBagConstraints.HORIZONTAL);
 
 		return largeSystemPanel;
@@ -187,7 +188,7 @@ public class AgentPanel12_GUI_Alan {
 		}
 	}
 
-	public static void addLine() {
+	public static void addMessageReportLine() {
 		addMessage("------------");
 	}
 }
