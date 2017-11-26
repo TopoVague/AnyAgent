@@ -1,4 +1,4 @@
-package Alan_GUI;
+package alan_GUI;
 
 import javax.swing.*;
 import java.awt.event.*;

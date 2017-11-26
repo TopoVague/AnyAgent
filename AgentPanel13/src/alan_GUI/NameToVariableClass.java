@@ -1,6 +1,6 @@
-package Alan_GUI;
+package alan_GUI;
 
-import Alan_GUI.SystemVariablesClass.guiVariableTypes;
+import alan_GUI.SystemVariablesClass.guiVariableTypes;
 
 public class NameToVariableClass {
 	String name;

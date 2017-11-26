@@ -1,4 +1,4 @@
-package Alan_GUI;
+package alan_GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -32,6 +32,33 @@ public class Constants {
 		gbc.weightx= weightX;
 		gbc.weighty= weightY;
 		gbc.fill= GridBagConstraints.BOTH;		
+		parent.add(child, gbc);
+	}
+	
+	public static void addGBCComponent(Container parent, Container child, int x, int y, double weightX, double weightY, int fill){
+		//GridBagLayout gbl= new GridBagLayout();
+		//parent.setLayout(gbl);
+		GridBagConstraints gbc= new GridBagConstraints();	
+		gbc.gridy= y;
+		gbc.gridx= x;		
+		gbc.weightx= weightX;
+		gbc.weighty= weightY;
+		//gbc.fill= GridBagConstraints.BOTH;
+		gbc.fill= fill;
+		parent.add(child, gbc);
+	}
+	
+	public static void addGBCComponent(Container parent, Container child, int x, int y, double weightX, double weightY, int fill, int anchor){
+		//GridBagLayout gbl= new GridBagLayout();
+		//parent.setLayout(gbl);
+		GridBagConstraints gbc= new GridBagConstraints();	
+		gbc.gridy= y;
+		gbc.gridx= x;		
+		gbc.weightx= weightX;
+		gbc.weighty= weightY;
+		//gbc.fill= GridBagConstraints.BOTH;
+		gbc.fill= fill;
+		gbc.anchor= GridBagConstraints.NORTH;
 		parent.add(child, gbc);
 	}
 }
