@@ -57,8 +57,21 @@ public class SystemVariablesClass {
 		variableSet.put("GH Path", new NameToVariableClass(guiVariableTypes.FILE));
 		variableSet.put("Export Directory", new NameToVariableClass(guiVariableTypes.DIRECTORY));
 		variableSet.put("Hill Climbing Step Size", new NameToVariableClass(guiVariableTypes.DOUBLE));
-		variableSet.put("Simluated Annealing Budget", new NameToVariableClass(guiVariableTypes.POSITIVE_INT));
+		variableSet.put("Simluated Annealing Budget", new NameToVariableClass(guiVariableTypes.POSITIVE_INT));		
+	}
+	
+	public String getPythonDictStr(){
+		//Basically everything is a string, and they will be interpreted accordingly
+		String tempStr= "";
 		
+		for (String key: variableSet.keySet()){
+			String strElement= String.format("'%s': '%s',\n", key, variableSet.get(key).valueString);
+			tempStr+= strElement;
+		}
+		
+		String pyStr=  String.format("{\n%s}",tempStr);
+		AgentPanel12_GUI_Alan.addMessage("Python dictionary string made as: " + pyStr);
+		return pyStr;		
 	}
 
 	public HashMap<String, NameToVariableClass> loadDefault() {
@@ -89,22 +102,26 @@ public class SystemVariablesClass {
 			AgentPanel12_GUI_Alan.addMessage("Default system variable file does not exist");
 		}
 		
-		if (variableSet!= null){ //That means this thing is already loaded
-			for (String key : loadedVariableSet.keySet()){
-				if (variableSet.containsKey(key) && variableSet.get(key).jtf_assoc!= null && loadedVariableSet.get(key).valueString!= null){
-					
-					if (variableSet.get(key).gvt== guiVariableTypes.FILE || variableSet.get(key).gvt== guiVariableTypes.DIRECTORY){					
-						variableSet.get(key).jtf_assoc.setText(loadedVariableSet.get(key).valueString);						
-						setFileString(key,new File(loadedVariableSet.get(key).valueString));
-					}
-					if (variableSet.get(key).gvt== guiVariableTypes.DOUBLE || variableSet.get(key).gvt== guiVariableTypes.POSITIVE_INT){
-						JTextField jtfAssoc= variableSet.get(key).jtf_assoc;
-						jtfAssoc.setText(loadedVariableSet.get(key).valueString);	
-						variableSet.get(key).valueString= loadedVariableSet.get(key).valueString;
-						AgentPanel12_GUI_Alan.addMessage("[" + key + "] set to "+ loadedVariableSet.get(key).valueString);
+		if (loadedVariableSet!= null){
+			if (variableSet!= null){ //That means this thing is already loaded
+				for (String key : loadedVariableSet.keySet()){
+					if (variableSet.containsKey(key) && variableSet.get(key).jtf_assoc!= null && loadedVariableSet.get(key).valueString!= null){
+						
+						if (variableSet.get(key).gvt== guiVariableTypes.FILE || variableSet.get(key).gvt== guiVariableTypes.DIRECTORY){					
+							variableSet.get(key).jtf_assoc.setText(loadedVariableSet.get(key).valueString);						
+							setFileString(key,new File(loadedVariableSet.get(key).valueString));
+						}
+						if (variableSet.get(key).gvt== guiVariableTypes.DOUBLE || variableSet.get(key).gvt== guiVariableTypes.POSITIVE_INT){
+							JTextField jtfAssoc= variableSet.get(key).jtf_assoc;
+							jtfAssoc.setText(loadedVariableSet.get(key).valueString);	
+							variableSet.get(key).valueString= loadedVariableSet.get(key).valueString;
+							AgentPanel12_GUI_Alan.addMessage("[" + key + "] set to "+ loadedVariableSet.get(key).valueString);
+						}
 					}
 				}
 			}
+		}else{
+			AgentPanel12_GUI_Alan.addMessage("Save was empty");
 		}
 		AgentPanel12_GUI_Alan.addMessageReportLine();
 		return loadedVariableSet;

@@ -150,6 +150,7 @@ public class AgentPanel12_GUI_Alan {
 				// TODO Auto-generated method stub
 				if (svc.canRun()) {
 					addMessage("Variables checked out. Starting run...");
+					String pyStr= svc.getPythonDictStr();
 				}
 				addMessageReportLine();
 				addMessage("Run ended");
