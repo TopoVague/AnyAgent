@@ -17,18 +17,33 @@ public class ClassToGUIAdapter {
 		 * String for file fields
 		 * If you don't want to show some of them, use the other function where you can pass an array list of string names you want to ommit
 		 * 
+		 * As an example, maybe PINT_ opener is checked for all variables that we want to show into the gui, and stuff like
+		 * 
+		 * PINT_
+		 * FILE_
+		 * DBL_
+		 * 
 		 * You know, we can also set here unique field name openers like dir_somename for this type of parsing as well!
 		 */
 		
 		for (int i = 0; i< fields.length; i++){
 			if (fields[i].getType().equals(int.class)){
-				variableSet.put(fields[i].getName(), new NameToVariableClass(guiVariableTypes.POSITIVE_INT));
+				//System.out.println(fields[i].getName());
+				System.out.println(fields[i].getName().trim().split("_")[0]);
+				if (fields[i].getName().trim().split("_")[0].equals("PINT")){
+					System.out.println("\t"+fields[i].getName());
+					variableSet.put(fields[i].getName(), new NameToVariableClass(guiVariableTypes.POSITIVE_INT));
+				}
 			}
 			if (fields[i].getType().equals(Double.class)){
-				variableSet.put(fields[i].getName(), new NameToVariableClass(guiVariableTypes.DOUBLE));
+				if (fields[i].getName().split("_")[0]=="DBL"){
+					variableSet.put(fields[i].getName(), new NameToVariableClass(guiVariableTypes.DOUBLE));
+				}
 			}
 			if (fields[i].getType().equals(String.class)){
-				variableSet.put(fields[i].getName(), new NameToVariableClass(guiVariableTypes.FILE));
+				if (fields[i].getName().split("_")[0]=="FILE"){
+					variableSet.put(fields[i].getName(), new NameToVariableClass(guiVariableTypes.FILE));
+				}
 			}
 		}				
 		return variableSet;		

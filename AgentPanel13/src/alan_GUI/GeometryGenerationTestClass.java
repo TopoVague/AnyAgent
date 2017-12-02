@@ -39,7 +39,7 @@ public class GeometryGenerationTestClass extends PApplet implements GeoGeneratio
 	public static boolean recreatedBool = false;
 	public static boolean hillClimbComplete = false;
 
-	public static int cnt = 0;// counter for the agent ids had to be placed here
+	public static int PINT_cnt = 0;// counter for the agent ids had to be placed here
 	public static int leftCnt = 0;
 	public static int rightCnt = 0;
 	public static int straightCnt = 0;
@@ -497,7 +497,7 @@ public class GeometryGenerationTestClass extends PApplet implements GeoGeneratio
 			IVec dir = pt2.dif(pt1);
 
 			if (IRandom.percent(probLeft)) { // bend usually 40
-				cnt++;
+				PINT_cnt++;
 				leftCnt++;
 				// rotated endpoint of agent
 				IVec nextDir = dir.dup().rot(IG.zaxis, genAngle);
@@ -515,14 +515,14 @@ public class GeometryGenerationTestClass extends PApplet implements GeoGeneratio
 				cpts[1][1] = surfPt2d;
 				cpts[2][0] = surfPt3;
 				cpts[2][1] = surfPt3d;
-				String newID = "left_" + cnt;
+				String newID = "left_" + PINT_cnt;
 				new ISurface(cpts, 2, 1).clr(0, 0, 255);
 
 				new LineAgent(pt2, dir.dup().rot(IG.zaxis, genAngle), surf, 1, newID);
 				// //println("Total left agents is: "+leftCnt);
 			}
 			if (IRandom.percent(probRight)) { // bend the other way usually 40
-				cnt++;
+				PINT_cnt++;
 				rightCnt++;
 
 				IVec nextDir = dir.dup().rot(IG.zaxis, -genAngle);
@@ -537,13 +537,13 @@ public class GeometryGenerationTestClass extends PApplet implements GeoGeneratio
 				cpts[1][1] = surfPt2d;
 				cpts[2][0] = surfPt3;
 				cpts[2][1] = surfPt3d;
-				String newID = "right_" + cnt;
+				String newID = "right_" + PINT_cnt;
 				new ISurface(cpts, 2, 1).clr(0, 255, 0);
 				new LineAgent(pt2, dir.dup().rot(IG.zaxis, -genAngle), surf, 1, newID, offsetDepth1);
 				// //println("Total right agents is: "+ rightCnt);
 			}
 			if (IRandom.percent(probStraight)) {
-				cnt++;
+				PINT_cnt++;
 				straightCnt++;
 
 				IVec nextDir = dir;
@@ -559,7 +559,7 @@ public class GeometryGenerationTestClass extends PApplet implements GeoGeneratio
 				cpts[2][0] = surfPt3;
 				cpts[2][1] = surfPt3d;
 
-				String newID = "straight_" + cnt;
+				String newID = "straight_" + PINT_cnt;
 				new ISurface(cpts, 2, 1).clr(255, 255, 0);
 				new LineAgent(pt2, dir.dup(), surf, 1, newID);
 				// //println("Total straight agents is: "+cnt);
@@ -605,7 +605,7 @@ public class GeometryGenerationTestClass extends PApplet implements GeoGeneratio
 				cpts[2][0] = surfPt3;
 				cpts[2][1] = surfPt3d;
 
-				String newID = "regeneratedLeft_" + cnt;
+				String newID = "regeneratedLeft_" + PINT_cnt;
 				new ISurface(cpts, 2, 1).clr(255, 0, 0);
 				new LineAgent(pt2, dir.dup().rot(IG.zaxis, genAngle), surf, 1, newID, offsetDepth1);
 				// //println("Total left agents is: "+leftCnt);
@@ -629,7 +629,7 @@ public class GeometryGenerationTestClass extends PApplet implements GeoGeneratio
 				cpts[2][0] = surfPt3;
 				cpts[2][1] = surfPt3d;
 
-				String newID = "reGeneratedRight_" + cnt;
+				String newID = "reGeneratedRight_" + PINT_cnt;
 				new ISurface(cpts, 2, 1).clr(255, 0, 0);
 				new LineAgent(pt2, dir.dup().rot(IG.zaxis, -genAngle), surf, 1, newID, offsetDepth1);
 				// //println("Total right agents is: "+ rightCnt);
@@ -652,7 +652,7 @@ public class GeometryGenerationTestClass extends PApplet implements GeoGeneratio
 				cpts[2][0] = surfPt3;
 				cpts[2][1] = surfPt3d;
 
-				String newID = "reGeneratedStraight_" + cnt;
+				String newID = "reGeneratedStraight_" + PINT_cnt;
 				new ISurface(cpts, 2, 1).clr(255, 0, 0);
 				new LineAgent(pt2, dir.dup(), surf, 1, newID);// //println("Total
 																// straight
@@ -692,7 +692,7 @@ public class GeometryGenerationTestClass extends PApplet implements GeoGeneratio
 
 	// get agentID
 	public int getAgentID() {
-		return cnt;
+		return PINT_cnt;
 
 	}
 

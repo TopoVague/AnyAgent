@@ -30,7 +30,8 @@ public class NameToVariableClass implements Serializable {
 	public void setAssocGuiValue(String valueString){
 		if (jtf_assoc!= null){
 			jtf_assoc.setText(valueString);
-			jtf_assoc.setForeground(new Color(10, 200, 10));
+			//jtf_assoc.setForeground(new Color(10, 200, 10));
+			jtf_assoc.setForeground(Color.black);
 		}
 		
 		if (js_assoc!= null){ //I guess it's possible that some one fucks up here			
@@ -46,7 +47,7 @@ public class NameToVariableClass implements Serializable {
 				AgentPanel12_GUI_Alan.addMessage(e.toString());
 			}
 		}else{
-			System.out.println("value string set for "+ valueString + " has no slider");
+			//System.out.println("value string set for "+ valueString + " has no slider");
 		}
 		
 	}

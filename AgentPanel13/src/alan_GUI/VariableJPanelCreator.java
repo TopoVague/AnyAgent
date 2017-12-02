@@ -53,6 +53,7 @@ public class VariableJPanelCreator {
 		if (gvt == guiVariableTypes.DIRECTORY || gvt == guiVariableTypes.FILE) {
 			JButton jb = getFileChooserButton(variableName, gvt, jtfFileName, variableSet);
 			jtfFileName.setText("No Selection");
+			jtfFileName.setForeground(Color.red);
 			jp.add(jb, BorderLayout.SOUTH);
 		}
 
@@ -124,12 +125,13 @@ public class VariableJPanelCreator {
 							// variableStrings.put(name, text);
 							//variableSet
 							variableSet.get(variableName).valueString = text;
+							jtf.setForeground(Color.black);
 							//AgentPanel12_GUI_Alan.addMessage("[" + variableName + "] set to " + text);
 						} else {
 							//variableSet.remove(variableName);
 							variableSet.get(variableName).valueString= null;
-							AgentPanel12_GUI_Alan
-									.addMessage("[" + variableName + "]'s value '" + text + "' is not a " + gvt.toString());
+							jtf.setForeground(Color.RED);
+							//AgentPanel12_GUI_Alan.addMessage("[" + variableName + "]'s value '" + text + "' is not a " + gvt.toString());
 						}
 					}
 				}
