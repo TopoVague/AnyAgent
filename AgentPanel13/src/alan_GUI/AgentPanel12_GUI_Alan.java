@@ -46,7 +46,7 @@ public class AgentPanel12_GUI_Alan {
 	private static JPanel geometryPanel;
 	private static JPanel plotPanel;
 	private static JTextArea jtaMessages;
-
+	private static SystemVariablesClass svc;
 	public static void main(String[] args) {
 		/*
 		 * The general idea: The gui is split into three slots, from left to
@@ -57,7 +57,7 @@ public class AgentPanel12_GUI_Alan {
 		 * a panel for the plots.
 		 * 
 		 */
-		mainFrame = new JFrame("AnyAgentFrame");
+		mainFrame = new JFrame("Advanced Window Mover 2000");
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setLayout(new GridBagLayout());
 
@@ -78,6 +78,8 @@ public class AgentPanel12_GUI_Alan {
 		// for (int x =0; x< 100; x++){
 		// addMessage("Testing " + x);
 		// }
+		svc.loadDefault();
+		
 	}
 
 	public static JPanel initializeSystemPanel() {
@@ -96,7 +98,7 @@ public class AgentPanel12_GUI_Alan {
 
 		largeSystemPanel.add(jspSystemScrollPane, BorderLayout.CENTER);
 		jpScrollPanePanel.setLayout(new GridBagLayout());
-		SystemVariablesClass svc = new SystemVariablesClass();
+		svc = new SystemVariablesClass();
 
 		int componentIndex = 0; // Keeping track of an index adding components
 								// down this panel
@@ -111,6 +113,22 @@ public class AgentPanel12_GUI_Alan {
 		});
 		// loadDefault.setBorder(new EmptyBorder(10,10,10,10));
 
+		Constants.addGBCComponent(jpScrollPanePanel, loadDefault, 0, componentIndex, 0.25, 1,
+				GridBagConstraints.HORIZONTAL);
+		componentIndex++;
+		
+		for (int n = 0; n < svc.variablesOrder.size(); n++) {
+			// NameToVariableClass nvc = svc.variables.get(n);
+			NameToVariableClass nvc = svc.variableSet.get(svc.variablesOrder.get(n));
+			guiVariableTypes gvType = nvc.gvt;
+			Constants.addGBCComponent(jpScrollPanePanel, VariableJPanelCreator.getPanel(svc.variablesOrder.get(n), gvType, svc.variableSet), 0, componentIndex, 0, 1,
+					GridBagConstraints.HORIZONTAL);
+			// System.out.println(n+ " Name: " + nvc.name + ", type: "+
+			// gvType.toString());
+			componentIndex++;
+		}
+
+
 		JButton saveButton = new JButton("Save as default");
 		// saveButton.setBorder(new EmptyBorder(10,10,10,10));
 		saveButton.addActionListener(new ActionListener() {
@@ -121,27 +139,11 @@ public class AgentPanel12_GUI_Alan {
 				svc.saveDefault();
 			}
 		});
-
+		componentIndex++;
 		
 		Constants.addGBCComponent(jpScrollPanePanel, saveButton, 0, componentIndex, 0.25, 1,
 				GridBagConstraints.HORIZONTAL);
 		componentIndex++;
-		Constants.addGBCComponent(jpScrollPanePanel, loadDefault, 0, componentIndex, 0.25, 1,
-				GridBagConstraints.HORIZONTAL);
-		componentIndex++;
-		
-		for (int n = 0; n < svc.variablesOrder.size(); n++) {
-			// NameToVariableClass nvc = svc.variables.get(n);
-			NameToVariableClass nvc = svc.variableSet.get(svc.variablesOrder.get(n));
-			guiVariableTypes gvType = nvc.gvt;
-			Constants.addGBCComponent(jpScrollPanePanel, svc.getPanel(svc.variablesOrder.get(n), gvType), 0, componentIndex, 0, 1,
-					GridBagConstraints.HORIZONTAL);
-			// System.out.println(n+ " Name: " + nvc.name + ", type: "+
-			// gvType.toString());
-			componentIndex++;
-		}
-
-
 		JButton runButton = new JButton("Run");
 		runButton.addActionListener(new ActionListener() {
 
