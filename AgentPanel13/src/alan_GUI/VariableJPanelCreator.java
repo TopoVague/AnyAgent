@@ -124,12 +124,12 @@ public class VariableJPanelCreator {
 						if (isCorrespondingValue) {
 							// variableStrings.put(name, text);
 							//variableSet
-							variableSet.get(variableName).valueString = text;
+							variableSet.get(variableName).valueString= (text);
 							jtf.setForeground(Color.black);
 							//AgentPanel12_GUI_Alan.addMessage("[" + variableName + "] set to " + text);
 						} else {
 							//variableSet.remove(variableName);
-							variableSet.get(variableName).valueString= null;
+							variableSet.get(variableName).valueString= (null);
 							jtf.setForeground(Color.RED);
 							//AgentPanel12_GUI_Alan.addMessage("[" + variableName + "]'s value '" + text + "' is not a " + gvt.toString());
 						}

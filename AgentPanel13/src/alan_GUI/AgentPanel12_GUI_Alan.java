@@ -194,6 +194,7 @@ public class AgentPanel12_GUI_Alan {
 			Constants.addGBCComponent(variablePanel, VariableJPanelCreator.getPanel(key, nvc.gvt, variableSet), 0, componentIndex, 1, 1,
 				GridBagConstraints.HORIZONTAL);
 			System.out.println("Adding variables : " + key);
+			nvc.setAssocGuiValue(nvc.valueString);
 			componentIndex++;
 		}		
 		xmlVariableContainer.add(jspVariables, BorderLayout.CENTER);

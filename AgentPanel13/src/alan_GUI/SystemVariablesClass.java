@@ -116,7 +116,7 @@ public class SystemVariablesClass {
 						}
 						if (variableSet.get(key).gvt== guiVariableTypes.DOUBLE || variableSet.get(key).gvt== guiVariableTypes.POSITIVE_INT){
 							variableSet.get(key).setAssocGuiValue(loadedVariableSet.get(key).valueString);	
-							variableSet.get(key).valueString= loadedVariableSet.get(key).valueString;
+							variableSet.get(key).valueString= (loadedVariableSet.get(key).valueString);
 							AgentPanel12_GUI_Alan.addMessage("[" + key + "] set to "+ loadedVariableSet.get(key).valueString);
 						}
 						if (variableSet.get(key).gvt== guiVariableTypes.ZERO_TO_ONE_SLIDER){

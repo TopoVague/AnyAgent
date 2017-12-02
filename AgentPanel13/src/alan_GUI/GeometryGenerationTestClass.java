@@ -747,35 +747,17 @@ public class GeometryGenerationTestClass extends PApplet implements GeoGeneratio
 		}
 	}
 
+
 	@Override
-	public HashMap<String, NameToVariableClass> getVariables() {
+	public String SaveConfiguration(String filepath) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	
 	@Override
-	public ArrayList<String> getVariableOrder() {
+	public String Run(HashMap<String, NameToVariableClass> guiVariables) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public String SaveXml(String filepath) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String Run(String xmlPath) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public JPanel getPanel() {
-		// TODO Auto-generated method stub
-		return null;
-		
-		//return VariableJPanelCreator.getPanel(name, gvt, variableSet)
 	}
 }
