@@ -31,32 +31,39 @@ public class ClassToGUIAdapter {
 				//System.out.println(fields[i].getName());
 				//System.out.println(fields[i].getName().trim().split("_")[0]);
 				if (fields[i].getName().trim().split("_")[0].equals("PINT")){ //apparently == doesn't work
-					System.out.println("\t"+fields[i].getName());
-					variableSet.put(fields[i].getName(), new NameToVariableClass(guiVariableTypes.POSITIVE_INT));
-					
-					try {
-						variableSet.get(fields[i].getName()).valueString= String.valueOf(fields[i].get(c));
-						//variableSet.get(fields[i].getName()).setAssocGuiValue(variableSet.get(fields[i].getName()).valueString); //calling this here is useless since the the textFields aren't loaded yet
-					} catch (IllegalArgumentException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IllegalAccessException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					setVariable(c, fields[i], guiVariableTypes.POSITIVE_INT, variableSet);
 				}
 			}
-			if (fields[i].getType().equals(Double.class)){
-				if (fields[i].getName().split("_")[0]=="DBL"){
-					variableSet.put(fields[i].getName(), new NameToVariableClass(guiVariableTypes.DOUBLE));
+			if (fields[i].getType().equals(double.class)){
+				if (fields[i].getName().split("_")[0].equals("DBL")){
+					setVariable(c, fields[i], guiVariableTypes.DOUBLE, variableSet);
 				}
 			}
 			if (fields[i].getType().equals(String.class)){
-				if (fields[i].getName().split("_")[0]=="FILE"){
-					variableSet.put(fields[i].getName(), new NameToVariableClass(guiVariableTypes.FILE));
+				if (fields[i].getName().split("_")[0].equals("FILE")){
+					setVariable(c, fields[i], guiVariableTypes.FILE, variableSet);
+				}
+				if (fields[i].getName().split("_")[0].equals("DIR")){
+					setVariable(c, fields[i], guiVariableTypes.DIRECTORY, variableSet);
 				}
 			}
 		}				
 		return variableSet;		
+	}
+	
+	private static void setVariable(Class c, Field f, guiVariableTypes gvt, HashMap<String, NameToVariableClass> variableSet){
+		System.out.println("\t"+f.getName());
+		variableSet.put(f.getName(), new NameToVariableClass(gvt));
+		
+		try {
+			variableSet.get(f.getName()).valueString= String.valueOf(f.get(c));
+			//variableSet.get(fields[i].getName()).setAssocGuiValue(variableSet.get(fields[i].getName()).valueString); //calling this here is useless since the the textFields aren't loaded yet
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

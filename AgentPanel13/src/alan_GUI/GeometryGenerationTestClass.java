@@ -67,9 +67,9 @@ public class GeometryGenerationTestClass extends PApplet implements GeoGeneratio
 	public static String fileName = "";
 
 	// location to retrieve input geometry for growing the panels
-	public static String geoFilePath;
+	public static String FILE_geoFilePath;
 	// location to save the generated Geometry
-	public static String exportedGeoFileLoc;
+	public static String DIR_exportedGeoFileLoc;
 	// location to save the xml with the agents information, save geometry and
 	// agents.xml in the same folder
 	public static String exportXmlFilePath;
@@ -99,7 +99,7 @@ public class GeometryGenerationTestClass extends PApplet implements GeoGeneratio
 	public static int CrashCounter = 0;
 
 	// parameters for WINDOW Agents-Position
-	public static double w1x;
+	public static double DBL_w1x;
 	public static double w1y;
 	public static double w1r;
 	public static double w2x;
@@ -134,7 +134,7 @@ public class GeometryGenerationTestClass extends PApplet implements GeoGeneratio
 		IG.bg(255, 255, 255);
 		size(1920, 1080, IG.GL);
 		IG.duration(runDuration);
-		IG.open(geoFilePath);
+		IG.open(FILE_geoFilePath);
 		IG.focus();
 		ISurface surf = IG.surface(0).clr(48, 144, 255, 50);
 		IPoint[] suppPoints = IG.layer("support_points").points();
@@ -146,20 +146,20 @@ public class GeometryGenerationTestClass extends PApplet implements GeoGeneratio
 		double initX;
 		double initDirX;
 		double initDirY;
-		if ((w1x < 0.5) && (w1y < 0.5) && (w2y < 0.5)) {
-			initX = (w1x + w2x) / 2;
+		if ((DBL_w1x < 0.5) && (w1y < 0.5) && (w2y < 0.5)) {
+			initX = (DBL_w1x + w2x) / 2;
 			initDirX = initX;
 			initDirY = 1;
 		} else if ((w1y < 0.25) && (w2y > 0.25)) {
-			initX = (w1x + w2x) / 2;
+			initX = (DBL_w1x + w2x) / 2;
 			initDirX = initX + w2x;
 			initDirY = w2y;
 		} else if ((w1y > 0.25) && (w2y < 0.25)) {
-			initX = (w1x) / 2;
-			initDirX = 1 + w1x;
+			initX = (DBL_w1x) / 2;
+			initDirX = 1 + DBL_w1x;
 			initDirY = w1y;
-		} else if ((w1y > 0.25) && (w2y > 0.25) && (w1x < 0.25)) {
-			initX = (w1x + w2x) / 2;
+		} else if ((w1y > 0.25) && (w2y > 0.25) && (DBL_w1x < 0.25)) {
+			initX = (DBL_w1x + w2x) / 2;
 			initDirX = 1 + w2x;
 			initDirY = 1;
 		} else {
@@ -170,7 +170,7 @@ public class GeometryGenerationTestClass extends PApplet implements GeoGeneratio
 		IVec initialAgentPos = new IVec(initX, 0, 0);
 		IVec initialAgentDir = new IVec(initDirX, initDirY, 0);
 		// map points to surface
-		IVec surfWin1 = surf.pt(w1x, w1y);
+		IVec surfWin1 = surf.pt(DBL_w1x, w1y);
 		IVec surfWin2 = surf.pt(w2x, w2y);
 		IVec surfWin3 = surf.pt(w2x + tempWindowFix, w2y);
 	}
@@ -668,7 +668,7 @@ public class GeometryGenerationTestClass extends PApplet implements GeoGeneratio
 		int y = 2015;
 		// println("Saving geometry at: " + exportedGeoFileLoc + " and exiting
 		// applet.");
-		IG.save(exportedGeoFileLoc);
+		IG.save(DIR_exportedGeoFileLoc);
 		if (runIndex.equals("0") || runIndex.equals("1")) {
 			// createXMLDoc(); // write an xml file that stores the data from
 			// the agents
@@ -725,9 +725,9 @@ public class GeometryGenerationTestClass extends PApplet implements GeoGeneratio
 		exportXmlFilePath = _args[1];
 
 		// imported geometry path
-		geoFilePath = _args[2];
+		FILE_geoFilePath = _args[2];
 		// exported geometry path
-		exportedGeoFileLoc = _args[3];
+		DIR_exportedGeoFileLoc = _args[3];
 
 		// run index
 		runIndex = _args[4];
