@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -20,6 +22,8 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import com.sun.xml.internal.ws.resources.AddressingMessages;
 
 import alan_GUI.SystemVariablesClass.guiVariableTypes;
 
@@ -41,7 +45,7 @@ public class AgentPanel12_GUI_Alan {
 	private static JPanel largeXmlPanel;
 	private static JPanel largeGraphPanel;
 
-	private static JPanel xmlVariablePanel;
+	private static JPanel xmlVariableContainer;
 	private static JPanel messagePanel;
 	private static JPanel geometryPanel;
 	private static JPanel plotPanel;
@@ -57,7 +61,7 @@ public class AgentPanel12_GUI_Alan {
 		 * a panel for the plots.
 		 * 
 		 */
-		mainFrame = new JFrame("Advanced Window Mover 2000");
+		mainFrame = new JFrame("Any Agent Frame");
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setLayout(new GridBagLayout());
 
@@ -167,17 +171,35 @@ public class AgentPanel12_GUI_Alan {
 	}
 
 	public static JPanel initializeXmlPanel() {
-		// setting up outside panel
+		// setting up outside panel===============================================
 		largeXmlPanel = new JPanel();
 		largeXmlPanel.setBackground(new Color(200, 200, 200));
 		largeXmlPanel.setLayout(new GridBagLayout());
 		largeXmlPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-
-		xmlVariablePanel = new JPanel();
-		Constants.addSetBorderLayoutTitle(xmlVariablePanel, "Xml Variables", true);
-
-		messagePanel = new JPanel();
-
+		
+		xmlVariableContainer = new JPanel(); //the top xml variables panel
+		Constants.addSetBorderLayoutTitle(xmlVariableContainer, "Xml Variables", true);
+		JPanel variablePanel= new JPanel();
+		JScrollPane jspVariables= new JScrollPane(variablePanel);
+		jspVariables.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		jspVariables.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		variablePanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		variablePanel.setLayout(new GridBagLayout());
+		
+		int componentIndex= 0;
+		HashMap<String, NameToVariableClass> variableSet= ClassToGUIAdapter.generateSetFromClass(new GeometryGenerationTestClass().getClass());	
+		System.out.println("Number of variables within the class: "+ variableSet.size());
+		for (String key: variableSet.keySet()){
+			NameToVariableClass nvc= variableSet.get(key);
+			Constants.addGBCComponent(variablePanel, VariableJPanelCreator.getPanel(key, nvc.gvt, variableSet), 0, componentIndex, 1, 1,
+				GridBagConstraints.HORIZONTAL);
+			System.out.println("Adding variables : " + key);
+			componentIndex++;
+		}		
+		xmlVariableContainer.add(jspVariables, BorderLayout.CENTER);
+		
+		//The msaage panel on the bottom===============================================
+		messagePanel = new JPanel(); //the bottom message panel
 		jtaMessages = new JTextArea();
 		jtaMessages.setWrapStyleWord(true);
 		jtaMessages.setLineWrap(true);
@@ -190,7 +212,7 @@ public class AgentPanel12_GUI_Alan {
 		Constants.addSetBorderLayoutTitle(messagePanel, "Messages", true);
 		messagePanel.add(jspMessages, BorderLayout.CENTER);
 
-		Constants.addGBCComponent(largeXmlPanel, xmlVariablePanel, 0, 0, 1, 1);
+		Constants.addGBCComponent(largeXmlPanel, xmlVariableContainer, 0, 0, 1, 1);
 		Constants.addGBCComponent(largeXmlPanel, messagePanel, 0, 1, 1, 1);
 		return largeXmlPanel;
 	}

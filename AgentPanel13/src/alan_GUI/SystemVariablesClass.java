@@ -45,6 +45,7 @@ public class SystemVariablesClass {
 	private String savedDefaultVariableFileName = "systemVariables.ser";
 
 	public SystemVariablesClass() {
+		//Only by adding variables into the variable order list will it actually hosw up on the gui!
 		variablesOrder = new ArrayList<String>(Arrays.asList("Rhino EXE Path", "XML dir", "Date Text File",
 				"Archive dir", "GH Path", "Export Directory", "Hill Climbing Step Size", "Simluated Annealing Budget", "Test Slider"));
 		//variableSet= loadDefault();
@@ -282,8 +283,7 @@ public class SystemVariablesClass {
 			String variableName = variablesOrder.get(n);
 			if (!variableSet.containsKey(variableName) || variableSet.get(variableName).valueString == null) {
 				answer = false;
-				AgentPanel12_GUI_Alan.addMessage("not set: [" + variableName + "]");
-				// break;
+				AgentPanel12_GUI_Alan.addMessage("not set: [" + variableName + "]");				
 			}
 		}
 		// AgentPanel12_GUI_Alan.addLine();
