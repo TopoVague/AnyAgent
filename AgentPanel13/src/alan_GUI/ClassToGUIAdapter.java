@@ -38,6 +38,9 @@ public class ClassToGUIAdapter {
 				if (fields[i].getName().split("_")[0].equals("DBL")){
 					setVariable(c, fields[i], guiVariableTypes.DOUBLE, variableSet);
 				}
+				if (fields[i].getName().split("_")[0].equals("SLD")){
+					setVariable(c, fields[i], guiVariableTypes.ZERO_TO_ONE_SLIDER, variableSet);
+				}
 			}
 			if (fields[i].getType().equals(String.class)){
 				if (fields[i].getName().split("_")[0].equals("FILE")){
@@ -57,7 +60,7 @@ public class ClassToGUIAdapter {
 		
 		try {
 			variableSet.get(f.getName()).valueString= String.valueOf(f.get(c));
-			//variableSet.get(fields[i].getName()).setAssocGuiValue(variableSet.get(fields[i].getName()).valueString); //calling this here is useless since the the textFields aren't loaded yet
+			//variableSet.get(fields[i].getName()).setAssocGuiValue(variableSet.get(fields[i].getName()).valueString); //calling this here is useless since the the textFields/GUI components aren't loaded yet
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

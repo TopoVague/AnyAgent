@@ -51,6 +51,9 @@ public class AgentPanel12_GUI_Alan {
 	private static JPanel plotPanel;
 	private static JTextArea jtaMessages;
 	private static SystemVariablesClass svc;
+	
+	public static HashMap<String, NameToVariableClass> geoGenerationVariableSet;
+	
 	public static void main(String[] args) {
 		/*
 		 * The general idea: The gui is split into three slots, from left to
@@ -89,7 +92,7 @@ public class AgentPanel12_GUI_Alan {
 	public static JPanel initializeSystemPanel() {
 		largeSystemPanel = new JPanel();
 		// systemPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-		largeSystemPanel.setLayout(new BorderLayout());
+		//largeSystemPanel.setLayout(new BorderLayout());
 		Constants.addSetBorderLayoutTitle(largeSystemPanel, "System Variables", true);
 
 		// JPanel systemPanelCanvas= new JPanel();
@@ -132,6 +135,16 @@ public class AgentPanel12_GUI_Alan {
 			componentIndex++;
 		}
 
+		JPanel searchPanel= new JPanel();	
+		Constants.addSetBorderLayoutTitle(searchPanel, "Search Options", false);
+		String[] searchChoices= {"Hillclimbing", "Simulated Annealing", "Monte Carlo"}; //hillclinbg sliders only, hill climb doubles
+		JComboBox<String> jcbSearchChoice= new JComboBox<String>(searchChoices);
+		searchPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		searchPanel.add(jcbSearchChoice, BorderLayout.SOUTH);
+		componentIndex++;
+		
+		Constants.addGBCComponent(jpScrollPanePanel, searchPanel, 0, componentIndex, 0.25, 1,
+				GridBagConstraints.HORIZONTAL);
 
 		JButton saveButton = new JButton("Save as default");
 		// saveButton.setBorder(new EmptyBorder(10,10,10,10));
@@ -157,6 +170,16 @@ public class AgentPanel12_GUI_Alan {
 				if (svc.canRun()) {
 					addMessage("Variables checked out. Starting run...");
 					String pyStr= svc.getPythonDictStr();
+					
+					if (geoGenerationVariableSet!= null){
+						//double heuristicValue= DummyPythonEXEValueRetriever.getHeuristicValue(svc.variableSet, geoGenerationVariableSet);
+						//addMessage("Heuristic value received: "+ heuristicValue);
+						
+						if (jcbSearchChoice.getSelectedItem().equals("Hillclimbing")){
+							SearchFunctions.runHillClimbing(svc.variableSet, geoGenerationVariableSet);
+						}
+						
+					}
 				}
 				addMessageReportLine();
 				addMessage("Run ended");
@@ -178,7 +201,7 @@ public class AgentPanel12_GUI_Alan {
 		largeXmlPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		xmlVariableContainer = new JPanel(); //the top xml variables panel
-		Constants.addSetBorderLayoutTitle(xmlVariableContainer, "Xml Variables", true);
+		Constants.addSetBorderLayoutTitle(xmlVariableContainer, "Geometry Generation Variables", true);
 		JPanel variablePanel= new JPanel();
 		JScrollPane jspVariables= new JScrollPane(variablePanel);
 		jspVariables.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -187,11 +210,11 @@ public class AgentPanel12_GUI_Alan {
 		variablePanel.setLayout(new GridBagLayout());
 		
 		int componentIndex= 0;
-		HashMap<String, NameToVariableClass> variableSet= ClassToGUIAdapter.generateSetFromClass(new GeometryGenerationTestClass().getClass());	
-		System.out.println("Number of variables within the class: "+ variableSet.size());
-		for (String key: variableSet.keySet()){
-			NameToVariableClass nvc= variableSet.get(key);
-			Constants.addGBCComponent(variablePanel, VariableJPanelCreator.getPanel(key, nvc.gvt, variableSet), 0, componentIndex, 1, 1,
+		geoGenerationVariableSet= ClassToGUIAdapter.generateSetFromClass(new GeometryGenerationTestClass().getClass());	
+		System.out.println("Number of variables within the class: "+ geoGenerationVariableSet.size());
+		for (String key: geoGenerationVariableSet.keySet()){
+			NameToVariableClass nvc= geoGenerationVariableSet.get(key);
+			Constants.addGBCComponent(variablePanel, VariableJPanelCreator.getPanel(key, nvc.gvt, geoGenerationVariableSet), 0, componentIndex, 1, 1,
 				GridBagConstraints.HORIZONTAL);
 			System.out.println("Adding variables : " + key);
 			nvc.setAssocGuiValue(nvc.valueString);

@@ -47,7 +47,7 @@ public class SystemVariablesClass {
 	public SystemVariablesClass() {
 		//Only by adding variables into the variable order list will it actually hosw up on the gui!
 		variablesOrder = new ArrayList<String>(Arrays.asList("Rhino EXE Path", "XML dir", "Date Text File",
-				"Archive dir", "GH Path", "Export Directory", "Hill Climbing Step Size", "Simluated Annealing Budget", "Test Slider"));
+				"Archive dir", "GH Path", "Export Directory", "Hill Climbing Step Size", "Iteration Budget"));
 		//variableSet= loadDefault();
 		AgentPanel12_GUI_Alan.addMessage("Initializing default variables");
 		variableSet = new HashMap<String, NameToVariableClass>();
@@ -58,8 +58,8 @@ public class SystemVariablesClass {
 		variableSet.put("GH Path", new NameToVariableClass(guiVariableTypes.FILE));
 		variableSet.put("Export Directory", new NameToVariableClass(guiVariableTypes.DIRECTORY));
 		variableSet.put("Hill Climbing Step Size", new NameToVariableClass(guiVariableTypes.DOUBLE));
-		variableSet.put("Simluated Annealing Budget", new NameToVariableClass(guiVariableTypes.POSITIVE_INT));	
-		variableSet.put("Test Slider", new NameToVariableClass(guiVariableTypes.ZERO_TO_ONE_SLIDER));
+		variableSet.put("Iteration Budget", new NameToVariableClass(guiVariableTypes.POSITIVE_INT));	
+		//variableSet.put("Test Slider", new NameToVariableClass(guiVariableTypes.ZERO_TO_ONE_SLIDER));
 	}
 	
 	public String getPythonDictStr(){

@@ -88,7 +88,7 @@ public class GeometryGenerationTestClass extends PApplet implements GeoGeneratio
 	public static boolean uniformExtrusion;
 	public static double extrusion;
 	public static double shadeVal;
-	public static double panelOffsetZ;
+	public static double SLD_panelOffsetZ;
 
 	// probabilty for each agent Type at each timestep
 	static int probRight;
@@ -275,7 +275,7 @@ public class GeometryGenerationTestClass extends PApplet implements GeoGeneratio
 		double agentAngle = genAngle;
 		double offsetDepth1 = extrusion;
 		double offsetDepth2;
-		double offsetZ1 = panelOffsetZ;
+		double offsetZ1 = SLD_panelOffsetZ;
 		double offsetDepthWeight;
 
 		public LineAgent(IVec pt, IVec dir, ISurface s, int life, String id) {
