@@ -10,6 +10,11 @@ import javax.swing.text.html.HTMLDocument.HTMLReader.HiddenAction;
 import alan_GUI.SystemVariablesClass.guiVariableTypes;
 public class SearchFunctions {
 	public static HashMap<String, Double> runHillClimbing(HashMap<String, NameToVariableClass> systemVariables, HashMap<String, NameToVariableClass> geoGenerationVariables) throws IOException, ClassNotFoundException{
+		AgentPanel12_GUI_Alan.addMessage("Running searches");
+		return null;
+	}
+	
+	public static HashMap<String, Double> runHillClimbing1(HashMap<String, NameToVariableClass> systemVariables, HashMap<String, NameToVariableClass> geoGenerationVariables) throws IOException, ClassNotFoundException{
 		
 		/*
 		 * Basically, start at one point, change based on the step size, then go again if you found a value larger than your current one. Every new iteration you remove on from your budget, until you run out
@@ -60,6 +65,7 @@ public class SearchFunctions {
 		
 		history.put(getHash(geoGenerationVariables), largestHValue);
 		AgentPanel12_GUI_Alan.addMessage("Initial value for (" + getHash(geoGenerationVariables) + "): " + largestHValue);
+		printVariableSet(geoGenerationVariables);
 		
 		boolean takeAnotherStep= true;
 		for (int n = 0; n < iterationBudget; n++){
@@ -90,6 +96,7 @@ public class SearchFunctions {
 						double retrievedValue= 0;
 						byte[] serializedConfiguration= null;
 						String geoConfigurationKey= getHash(geoGenerationVariables);
+						
 						if (!history.containsKey(geoConfigurationKey)){ //if it doesn't exist calculate it
 							AgentPanel12_GUI_Alan.addMessage("\tCalculating value for key: " + geoConfigurationKey);
 							retrievedValue= DummyPythonEXEValueRetriever.getHeuristicValue(systemVariables, geoGenerationVariables);
@@ -108,6 +115,8 @@ public class SearchFunctions {
 							largestHValue= retrievedValue;
 							bestSerializedConfiguration= serializedConfiguration;
 							takeAnotherStep= true;
+							
+							printVariableSet((HashMap<String, NameToVariableClass>) Serializer.deserialize(bestSerializedConfiguration));
 						}
 						
 						//Here you need to return the changed value back to its original state so you don't iterate too far...
@@ -129,12 +138,17 @@ public class SearchFunctions {
 		
 		HashMap<String, NameToVariableClass> deserializedBestConfigurations= (HashMap<String, NameToVariableClass>) Serializer.deserialize(bestSerializedConfiguration);
 		AgentPanel12_GUI_Alan.addMessage("Printing best configuration found: ");
-		for (String key: deserializedBestConfigurations.keySet()){
-			AgentPanel12_GUI_Alan.addMessage("\t" + key + " : " + deserializedBestConfigurations.get(key).valueString);
-		}	
-		
+		printVariableSet(deserializedBestConfigurations);
+
 		return history;
 	}	
+	
+	public static void printVariableSet(HashMap<String, NameToVariableClass> toPrintVariableSet){
+		for (String key: toPrintVariableSet.keySet()){
+			AgentPanel12_GUI_Alan.addMessage("\t" + key + " : " + toPrintVariableSet.get(key).valueString);
+		}	
+		
+	}
 	
 	public static String getHash(HashMap<String, NameToVariableClass> geoGenerationVariables){ 
 		//System.out.println(geoGenerationVariables.values().toString());

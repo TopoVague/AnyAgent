@@ -39,6 +39,16 @@ public class GeometryGenerationTestClass extends PApplet implements GeoGeneratio
 	public static boolean recreatedBool = false;
 	public static boolean hillClimbComplete = false;
 
+	//Just for testing
+//	public static double DBL_bs1;
+//	public static double DBL_bs2;
+//	public static double DBL_bs3;
+//	public static double DBL_bs4;
+//	public static double DBL_bs5;
+//	public static double DBL_bs6;
+//	public static double DBL_bs7;
+	
+	
 	public static int PINT_cnt = 0;// counter for the agent ids had to be placed here
 	public static int leftCnt = 0;
 	public static int rightCnt = 0;
