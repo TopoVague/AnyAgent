@@ -19,7 +19,7 @@ public class SearchFunctions {
 		HashMap<String, Double> history= new HashMap<String,Double>();
 		
 		int iterationBudget= Integer.parseInt(systemVariables.get("Iteration Budget").valueString);
-		ArrayList<String> variablesToStep= new ArrayList<String>();
+		ArrayList<NameToVariableClass> variablesToStep= new ArrayList<NameToVariableClass>();
 		
 		double hillClimbingStepSize= Double.parseDouble(systemVariables.get("Hill Climbing Step Size").valueString);
 		
@@ -30,25 +30,29 @@ public class SearchFunctions {
 		}
 		
 		for (String key: geoGenerationVariables.keySet()){
+			boolean somethingAdded= false;
 			if (geoGenerationVariables.get(key).gvt== guiVariableTypes.DOUBLE){
-				variablesToStep.add(key);
+				variablesToStep.add(geoGenerationVariables.get(key));
+				somethingAdded= true;
 			}
 			if (geoGenerationVariables.get(key).gvt== guiVariableTypes.ZERO_TO_ONE_SLIDER){
-				variablesToStep.add(key);
+				variablesToStep.add(geoGenerationVariables.get(key));
+				somethingAdded= true;
 			}
 			if (alsoCheckIntegers){
 				if (geoGenerationVariables.get(key).gvt== guiVariableTypes.POSITIVE_INT){
-					variablesToStep.add(key);
+					variablesToStep.add(geoGenerationVariables.get(key));
+					somethingAdded= true;
 				}
+			}
+			
+			if (somethingAdded){
+				AgentPanel12_GUI_Alan.addMessage("... "+ key);
 			}
 			
 		}
 		AgentPanel12_GUI_Alan.addMessage("Hill climbing considering integers: "+ alsoCheckIntegers );
 		AgentPanel12_GUI_Alan.addMessage("Hillclimbing is stepping on these variables: " );
-		for (String key: variablesToStep){
-			AgentPanel12_GUI_Alan.addMessage("... "+ key);
-		}
-		
 		
 		//For each variable being iterated, create an added and a subtracted version corresponding to their limits
 		double largestHValue= DummyPythonEXEValueRetriever.getHeuristicValue(systemVariables, geoGenerationVariables);
@@ -63,16 +67,25 @@ public class SearchFunctions {
 			AgentPanel12_GUI_Alan.addMessageReportLine();
 			if (takeAnotherStep){
 				takeAnotherStep= false;
-				for (String key: variablesToStep ) { //Iterate through each variable
+				for (NameToVariableClass nvc: variablesToStep ) { //Iterate through each variable
 					//Iterate up and down for each and add those values to history
 					
-					AgentPanel12_GUI_Alan.addMessage("Changing steps for : " + key);
+					AgentPanel12_GUI_Alan.addMessage("Changing steps for : " + nvc);
 					for (int j = -1; j < 2; j+=2){ //iterating positive and negative getting -1 and 1
-						double initialValueForTheVariable= Double.parseDouble(geoGenerationVariables.get(key).valueString);
+						double initialValueForTheVariable= Double.parseDouble(nvc.valueString);
 						System.out.println(j);
 						System.out.println(initialValueForTheVariable);
 						System.out.println(String.valueOf(initialValueForTheVariable+ (j*Math.abs(hillClimbingStepSize))));
-						geoGenerationVariables.get(key).valueString= String.valueOf(initialValueForTheVariable+ (j*hillClimbingStepSize)); //set that stepped value as part of the formula
+						
+						/*
+						 * CLAMP VALUES based on there existing limits here
+						 */
+						double newSteppedValue= initialValueForTheVariable+ (j*hillClimbingStepSize);
+						if (nvc.gvt== guiVariableTypes.ZERO_TO_ONE_SLIDER){ //clamp the values
+							newSteppedValue= Math.max(0, Math.min(1, newSteppedValue));
+						}
+						
+						nvc.valueString= String.valueOf(initialValueForTheVariable+ (j*hillClimbingStepSize)); //set that stepped value as part of the formula
 						
 						double retrievedValue= 0;
 						byte[] serializedConfiguration= null;
@@ -98,7 +111,7 @@ public class SearchFunctions {
 						}
 						
 						//Here you need to return the changed value back to its original state so you don't iterate too far...
-						geoGenerationVariables.get(key).valueString= String.valueOf(initialValueForTheVariable);
+						nvc.valueString= String.valueOf(initialValueForTheVariable);
 					}
 					//If you are here you can adapt the best one?					
 				}
@@ -124,7 +137,7 @@ public class SearchFunctions {
 	}	
 	
 	public static String getHash(HashMap<String, NameToVariableClass> geoGenerationVariables){ 
-		System.out.println(geoGenerationVariables.values().toString());
+		//System.out.println(geoGenerationVariables.values().toString());
 		String hash= null;
 		try {
 			hash= java.security.MessageDigest.getInstance("MD5").digest(Serializer.serialize(geoGenerationVariables)).toString();

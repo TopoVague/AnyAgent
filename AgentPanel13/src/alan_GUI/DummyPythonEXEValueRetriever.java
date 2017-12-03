@@ -6,9 +6,7 @@ import java.util.Random;
 public class DummyPythonEXEValueRetriever {
 	public static double getHeuristicValue(HashMap<String, NameToVariableClass> systemVariableSet, HashMap<String, NameToVariableClass> geoGenerationVariableSet){
 		Random randall= new Random();
-		//randall.setSeed(geoGenerationVariableSet.hashCode());
-		//AgentPanel12_GUI_Alan.addMessage("\tHash value of variable set: " + geoGenerationVariableSet.hashCode());
-		randall.setSeed(hash(SearchFunctions.getHash(geoGenerationVariableSet)));
+		//randall.setSeed(hash(SearchFunctions.getHash(geoGenerationVariableSet)));
 		return randall.nextDouble();
 	}
 	
