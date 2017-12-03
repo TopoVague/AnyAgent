@@ -195,6 +195,15 @@ public class AgentPanel12_GUI_Alan {
 							}
 						}
 						
+						if (jcbSearchChoice.getSelectedItem().equals("Simulated Annealing")){
+							try {
+								SearchFunctions.runSimulatedAnnealing(svc.variableSet, geoGenerationVariableSet);
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						}
+						
 					}
 				}
 				addMessageReportLine();
