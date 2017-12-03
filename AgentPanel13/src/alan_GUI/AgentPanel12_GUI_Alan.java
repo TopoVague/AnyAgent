@@ -176,7 +176,13 @@ public class AgentPanel12_GUI_Alan {
 						//addMessage("Heuristic value received: "+ heuristicValue);
 						
 						if (jcbSearchChoice.getSelectedItem().equals("Hillclimbing")){
-							SearchFunctions.runHillClimbing(svc.variableSet, geoGenerationVariableSet);
+							try {
+								SearchFunctions.runHillClimbing(svc.variableSet, geoGenerationVariableSet);
+							} catch (IOException | ClassNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+								addMessage(e1.toString());
+							}
 						}
 						
 					}
