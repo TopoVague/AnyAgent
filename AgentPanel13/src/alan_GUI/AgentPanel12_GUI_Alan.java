@@ -26,6 +26,7 @@ import org.xml.sax.SAXException;
 import com.sun.xml.internal.ws.resources.AddressingMessages;
 
 import alan_GUI.SystemVariablesClass.guiVariableTypes;
+import sun.management.snmp.jvminstr.JvmClassLoadingImpl;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -161,7 +162,7 @@ public class AgentPanel12_GUI_Alan {
 		Constants.addGBCComponent(jpScrollPanePanel, saveButton, 0, componentIndex, 0.25, 1,
 				GridBagConstraints.HORIZONTAL);
 		componentIndex++;
-		JButton runButton = new JButton("Run");
+		JButton runButton = new JButton("Run"); //RUN BUTTON STUFF HERE!!!!!!!!
 		runButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -182,6 +183,15 @@ public class AgentPanel12_GUI_Alan {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 								addMessage(e1.toString());
+							}
+						}
+						
+						if (jcbSearchChoice.getSelectedItem().equals("Monte Carlo")){
+							try {
+								SearchFunctions.runMonteCarlo(svc.variableSet, geoGenerationVariableSet);
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
 							}
 						}
 						
