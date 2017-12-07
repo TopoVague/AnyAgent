@@ -2,6 +2,7 @@ package alan_GUI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import javax.swing.JPanel;
 
@@ -22,5 +23,5 @@ public interface GeoGenerationComponent {
 	//public HashMap<String, NameToVariableClass> getVariables();  //Don't need this since the variables that want to be exposed has its own syntax
 	//public ArrayList<String> getVariableOrder(); //Get the order of the variables that you want to display in the GUI //NO LONGER needs this since the order is also retrieved by reflection
 	public String SaveConfiguration(String filepath); //returns the path if it's true, or null if false
-	public String Run(HashMap<String, NameToVariableClass> guiVariables); //return the file path to the geometry if it works	
+	public String Run(LinkedHashMap<String, NameToVariableClass> guiVariables); //return the file path to the geometry if it works	
 }

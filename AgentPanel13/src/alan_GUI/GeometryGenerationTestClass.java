@@ -4,6 +4,7 @@ import processing.core.PApplet;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import igeo.*;
 
@@ -763,11 +764,13 @@ public class GeometryGenerationTestClass extends PApplet implements GeoGeneratio
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	
+
 	@Override
-	public String Run(HashMap<String, NameToVariableClass> guiVariables) {
+	public String Run(LinkedHashMap<String, NameToVariableClass> guiVariables) {
 		// TODO Auto-generated method stub
+		//Probably just set all the corresponding variables through reflection to values stored within this collection
+		
 		return null;
 	}
 }

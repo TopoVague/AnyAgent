@@ -22,7 +22,7 @@ public class SearchFunctions {
 		return null;
 	}
 	
-	public static HashMap<String, Double> runMonteCarlo (HashMap<String, NameToVariableClass> systemVariables, HashMap<String, NameToVariableClass> geoGenerationVariables) throws IOException {
+	public static HashMap<String, Double> runMonteCarlo (HashMap<String, NameToVariableClass> systemVariables, HashMap<String, NameToVariableClass> geoGenerationVariables) throws IOException, InterruptedException {	
 		AgentPanel12_GUI_Alan.addMessage("Running monte carlo search");
 		
 		//Retrieve all doubles, sliders, and positive integers, then randomize all of them until the budget runs out
@@ -59,16 +59,20 @@ public class SearchFunctions {
 		for (int n = 0; n < iterationBudget; n++){
 			AgentPanel12_GUI_Alan.addMessage("Running " + (n+1) + " / "+ iterationBudget);
 			for (String key: geoGenerationVariables.keySet()){
-				boolean somethingAdded= false;
-				if (geoGenerationVariables.get(key).gvt== guiVariableTypes.DOUBLE){				
-					geoGenerationVariables.get(key).valueString= String.valueOf(-Double.MAX_VALUE + (Double.MAX_VALUE- Double.MIN_VALUE)  * randall.nextDouble());
+
+				NameToVariableClass nvc= geoGenerationVariables.get(key);
+				if (nvc.gvt== guiVariableTypes.DOUBLE){				
+					nvc.valueString= String.valueOf(-Double.MAX_VALUE + (Double.MAX_VALUE- Double.MIN_VALUE)  * randall.nextDouble());
+					nvc.setAssocGuiValue();
 				}
-				if (geoGenerationVariables.get(key).gvt== guiVariableTypes.ZERO_TO_ONE_SLIDER){
-					geoGenerationVariables.get(key).valueString= String.valueOf(randall.nextDouble());
+				if (nvc.gvt== guiVariableTypes.ZERO_TO_ONE_SLIDER){
+					nvc.valueString= String.valueOf(randall.nextDouble());
+					nvc.setAssocGuiValue();
 				}
 	
-				if (geoGenerationVariables.get(key).gvt== guiVariableTypes.POSITIVE_INT){
-					geoGenerationVariables.get(key).valueString= String.valueOf(-Integer.MAX_VALUE + (Integer.MAX_VALUE- Integer.MIN_VALUE)  * randall.nextInt());
+				if (nvc.gvt== guiVariableTypes.POSITIVE_INT){
+					nvc.valueString= String.valueOf(-Integer.MAX_VALUE + (Integer.MAX_VALUE- Integer.MIN_VALUE)  * randall.nextInt());
+					nvc.setAssocGuiValue();
 				}		
 			}
 			
@@ -88,6 +92,8 @@ public class SearchFunctions {
 				bestConfigurationSet= (HashMap<String, NameToVariableClass>) geoGenerationVariables.clone();
 				AgentPanel12_GUI_Alan.addMessage("\tNew max value: " + maxValue);
 			}
+			
+			//AgentPanel12_GUI_Alan.repaint();
 		}
 		
 		AgentPanel12_GUI_Alan.addMessage("Final max value: " + maxValue);

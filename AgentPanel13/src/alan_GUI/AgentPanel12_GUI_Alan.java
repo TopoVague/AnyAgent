@@ -3,6 +3,7 @@ package alan_GUI;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -86,7 +87,12 @@ public class AgentPanel12_GUI_Alan {
 		// for (int x =0; x< 100; x++){
 		// addMessage("Testing " + x);
 		// }
-		svc.loadDefault();
+		try{
+			svc.loadDefault();
+		}catch (Exception e) {
+			// TODO: handle exception
+			addMessage(e.toString());
+		}
 		
 	}
 
@@ -125,14 +131,19 @@ public class AgentPanel12_GUI_Alan {
 				GridBagConstraints.HORIZONTAL);
 		componentIndex++;
 		
-		for (int n = 0; n < svc.variablesOrder.size(); n++) {
+		ArrayList<String> keySetList = new ArrayList<String>(svc.variableSet.keySet());
+		for (int n = 0; n < svc.variableSet.size(); n++) {
 			// NameToVariableClass nvc = svc.variables.get(n);
-			NameToVariableClass nvc = svc.variableSet.get(svc.variablesOrder.get(n));
-			guiVariableTypes gvType = nvc.gvt;
-			Constants.addGBCComponent(jpScrollPanePanel, VariableJPanelCreator.getPanel(svc.variablesOrder.get(n), gvType, svc.variableSet), 0, componentIndex, 0, 1,
-					GridBagConstraints.HORIZONTAL);
-			// System.out.println(n+ " Name: " + nvc.name + ", type: "+
-			// gvType.toString());
+			NameToVariableClass nvc = svc.variableSet.get(keySetList.get(n));
+			if (nvc!= null){
+				guiVariableTypes gvType = nvc.gvt;
+				Constants.addGBCComponent(jpScrollPanePanel, VariableJPanelCreator.getPanel(keySetList.get(n), gvType, svc.variableSet), 0, componentIndex, 0, 1,
+						GridBagConstraints.HORIZONTAL);
+				// System.out.println(n+ " Name: " + nvc.name + ", type: "+
+				// gvType.toString());
+			}else{
+				System.out.println("NVC is null in key retrieval of : " + keySetList.get(n));
+			}
 			componentIndex++;
 		}
 
@@ -169,6 +180,7 @@ public class AgentPanel12_GUI_Alan {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if (svc.canRun()) {
+					runButton.setEnabled(false);
 					addMessage("Variables checked out. Starting run...");
 					String pyStr= svc.getPythonDictStr();
 					
@@ -189,7 +201,7 @@ public class AgentPanel12_GUI_Alan {
 						if (jcbSearchChoice.getSelectedItem().equals("Monte Carlo")){
 							try {
 								SearchFunctions.runMonteCarlo(svc.variableSet, geoGenerationVariableSet);
-							} catch (IOException e1) {
+							} catch (IOException | InterruptedException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
@@ -202,12 +214,12 @@ public class AgentPanel12_GUI_Alan {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
-						}
-						
+						}						
 					}
 				}
 				addMessageReportLine();
 				addMessage("Run ended");
+				runButton.setEnabled(true);
 			}
 		});
 		// runButton.setEnabled(false);
@@ -299,5 +311,9 @@ public class AgentPanel12_GUI_Alan {
 
 	public static void addMessageReportLine() {
 		addMessage("------------");
+	}
+	
+	public static void repaint(){
+		mainFrame.repaint();
 	}
 }

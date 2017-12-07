@@ -2,21 +2,21 @@ package alan_GUI;
 
 import java.util.HashMap;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
+import alan_GUI.SystemVariablesClass.guiVariableTypes;
 
 public class DummyPythonEXEValueRetriever {
-	public static double getHeuristicValue(HashMap<String, NameToVariableClass> systemVariableSet, HashMap<String, NameToVariableClass> geoGenerationVariableSet){
-		Random randall= new Random();
-		//randall.setSeed(hash(SearchFunctions.getHash(geoGenerationVariableSet)));
-		return randall.nextDouble();
-	}
-	
-	public static long hash(String string) {
-		  long h = 1125899906842597L; // prime
-		  int len = string.length();
+	public static double getHeuristicValue(HashMap<String, NameToVariableClass> systemVariableSet,
+			HashMap<String, NameToVariableClass> geoGenerationVariableSet) throws InterruptedException {
 
-		  for (int i = 0; i < len; i++) {
-		    h = 31*h + string.charAt(i);
-		  }
-		  return h;
-		}
+		//AgentPanel12_GUI_Alan.addMessage("Waiting for answer...");
+		// TimeUnit.SECONDS.sleep(10);
+		
+		HvalFinderWorker hfw= new HvalFinderWorker(systemVariableSet, geoGenerationVariableSet);
+		Thread t= new Thread(hfw);
+		t.start();
+		t.join();
+		return hfw.getHVal();
+	}
 }

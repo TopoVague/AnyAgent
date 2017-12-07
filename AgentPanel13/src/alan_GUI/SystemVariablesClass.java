@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.InputVerifier;
@@ -38,19 +39,18 @@ public class SystemVariablesClass {
 		FILE, DIRECTORY, DOUBLE, POSITIVE_INT, ZERO_TO_ONE_SLIDER, BOOLEAN, STRING
 	};
 
-	ArrayList<String> variablesOrder;
-	HashMap<String, NameToVariableClass> variableSet; // The variables used to
+	//ArrayList<String> variablesOrder;
+	LinkedHashMap<String, NameToVariableClass> variableSet; // The variables used to
 														// run the system
 
 	private String savedDefaultVariableFileName = "systemVariables.ser";
 
 	public SystemVariablesClass() {
 		//Only by adding variables into the variable order list will it actually hosw up on the gui!
-		variablesOrder = new ArrayList<String>(Arrays.asList("Rhino EXE Path", "XML dir", "Date Text File",
-				"Archive dir", "GH Path", "Export Directory", "Hill Climbing Step Size", "Iteration Budget"));
+		//variablesOrder = new ArrayList<String>(Arrays.asList("Rhino EXE Path", "XML dir", "Date Text File", "Archive dir", "GH Path", "Export Directory", "Hill Climbing Step Size", "Iteration Budget"));
 		//variableSet= loadDefault();
 		AgentPanel12_GUI_Alan.addMessage("Initializing default variables");
-		variableSet = new HashMap<String, NameToVariableClass>();
+		variableSet = new LinkedHashMap<String, NameToVariableClass>();
 		variableSet.put("Rhino EXE Path", new NameToVariableClass(guiVariableTypes.FILE));
 		variableSet.put("XML dir", new NameToVariableClass(guiVariableTypes.DIRECTORY));
 		variableSet.put("Date Text File", new NameToVariableClass(guiVariableTypes.FILE));
@@ -60,6 +60,8 @@ public class SystemVariablesClass {
 		variableSet.put("Hill Climbing Step Size", new NameToVariableClass(guiVariableTypes.DOUBLE));
 		variableSet.put("Iteration Budget", new NameToVariableClass(guiVariableTypes.POSITIVE_INT));	
 		//variableSet.put("Test Slider", new NameToVariableClass(guiVariableTypes.ZERO_TO_ONE_SLIDER));
+		
+		System.out.println("System variable set count: " + variableSet.size());
 	}
 	
 	public String getPythonDictStr(){
@@ -76,19 +78,19 @@ public class SystemVariablesClass {
 		return pyStr;		
 	}
 
-	public HashMap<String, NameToVariableClass> loadDefault() {
+	public LinkedHashMap<String, NameToVariableClass> loadDefault() {
 		// Look for the save file in the current directory. Attempt to
 		// deserialize it
 		AgentPanel12_GUI_Alan.addMessageReportLine();
 		AgentPanel12_GUI_Alan.addMessage("Attempting to load default system variables from "+ savedDefaultVariableFileName);
 		
-		HashMap<String, NameToVariableClass> loadedVariableSet = null;
+		LinkedHashMap<String, NameToVariableClass> loadedVariableSet = null;
 		File SerializedSystemVariables = new File(savedDefaultVariableFileName);
 		if (SerializedSystemVariables.exists()) {
 			try {
 				FileInputStream fis = new FileInputStream(savedDefaultVariableFileName);
 				ObjectInputStream ois = new ObjectInputStream(fis);
-				loadedVariableSet = (HashMap) ois.readObject();
+				loadedVariableSet = (LinkedHashMap) ois.readObject();
 				ois.close();
 				fis.close();
 				AgentPanel12_GUI_Alan.addMessage("System variables loaded successfully");
@@ -279,12 +281,14 @@ public class SystemVariablesClass {
 		AgentPanel12_GUI_Alan.addMessageReportLine();
 		AgentPanel12_GUI_Alan.addMessage("Starting run...");
 		AgentPanel12_GUI_Alan.addMessageReportLine();
-		for (int n = 0; n < variablesOrder.size(); n++) {
-			String variableName = variablesOrder.get(n);
-			if (!variableSet.containsKey(variableName) || variableSet.get(variableName).valueString == null) {
-				answer = false;
-				AgentPanel12_GUI_Alan.addMessage("not set: [" + variableName + "]");				
-			}
+		for (int n = 0; n < variableSet.size(); n++) {
+//			String variableName = variableSet.get(n);
+//			if (!variableSet.containsKey(variableName) || variableSet.get(variableName).valueString == null) {
+//				answer = false;
+//				AgentPanel12_GUI_Alan.addMessage("not set: [" + variableName + "]");				
+//			}
+			
+			//PROBABLY WRITE HERE A CUSTOM VERIFICATION FUNCTION THAT LIKE verify(guiVariableType) which returns boolean
 		}
 		// AgentPanel12_GUI_Alan.addLine();
 		return answer;

@@ -51,4 +51,8 @@ public class NameToVariableClass implements Serializable {
 		}
 		
 	}
+	
+	public void setAssocGuiValue(){
+		setAssocGuiValue(this.valueString);
+	}
 }
