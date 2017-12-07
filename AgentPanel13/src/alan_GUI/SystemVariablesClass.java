@@ -49,7 +49,7 @@ public class SystemVariablesClass {
 		//Only by adding variables into the variable order list will it actually hosw up on the gui!
 		//variablesOrder = new ArrayList<String>(Arrays.asList("Rhino EXE Path", "XML dir", "Date Text File", "Archive dir", "GH Path", "Export Directory", "Hill Climbing Step Size", "Iteration Budget"));
 		//variableSet= loadDefault();
-		AgentPanel12_GUI_Alan.addMessage("Initializing default variables");
+		AgentPanel12_GUI_Alan.addMessage("Initializing default system variables");
 		variableSet = new LinkedHashMap<String, NameToVariableClass>();
 		variableSet.put("Rhino EXE Path", new NameToVariableClass(guiVariableTypes.FILE));
 		variableSet.put("XML dir", new NameToVariableClass(guiVariableTypes.DIRECTORY));

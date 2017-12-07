@@ -773,4 +773,12 @@ public class GeometryGenerationTestClass extends PApplet implements GeoGeneratio
 		
 		return null;
 	}
+
+	@Override
+	public String[] GetVariableDisplayOrder() {
+		// TODO Auto-generated method stub
+		//return null; //If you want an automatic listing
+		
+		return new String[] {"PINT_cnt"};
+	}
 }

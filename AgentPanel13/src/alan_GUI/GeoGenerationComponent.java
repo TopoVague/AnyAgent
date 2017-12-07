@@ -22,6 +22,7 @@ public interface GeoGenerationComponent {
 	//public JPanel getPanel(); //basically the panel is generated off of reflected field names
 	//public HashMap<String, NameToVariableClass> getVariables();  //Don't need this since the variables that want to be exposed has its own syntax
 	//public ArrayList<String> getVariableOrder(); //Get the order of the variables that you want to display in the GUI //NO LONGER needs this since the order is also retrieved by reflection
+	public String[] GetVariableDisplayOrder();
 	public String SaveConfiguration(String filepath); //returns the path if it's true, or null if false
-	public String Run(LinkedHashMap<String, NameToVariableClass> guiVariables); //return the file path to the geometry if it works	
+	public String Run(LinkedHashMap<String, NameToVariableClass> guiVariables); //return the file path to the geometry if it works		
 }
