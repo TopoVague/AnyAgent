@@ -2,6 +2,16 @@
 layout: default
 ---
 
+
+Atopo is an open-source, Python-based computational framework for collaboration and research in architecture, engineering and digital fabrication. It is developed by Schemalab (https://schemalab.usc.edu) of University of Southern California (http://www.usc.edu), with the support of the National Science Fun
+
+The main contributors are:
+
+Evangelos Pantazis
+
+Alan Wang
+
+
 Text can be **bold**, _italic_, or ~~strikethrough~~.
 
 [Link to another page](./another-page.html).
