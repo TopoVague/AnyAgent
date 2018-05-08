@@ -5,11 +5,11 @@ layout: default
 
 **Atopo** is an open-source, Python-based computational framework for collaboration and research in architecture, engineering and digital fabrication. It is developed by Schemalab (https://schemalab.usc.edu) of University of Southern California (https://www.usc.edu), with the support of the National Science Foundation (https://www.nsf.gov/)
 
-The main contributors are:
+The main contributors are :
 
-Evangelos Pantazis
+_Evangelos Pantazis, Ph.d. Student, Viterbi School of Engineering_
 
-Alan Wang
+_Alan Wang, Ph.d. Student, University of Virginia_
 
 
 
@@ -24,7 +24,6 @@ There should be whitespace between paragraphs. We recommend including a README, 
 # Features
 
 *   A basic Python base with flexible datastructures, algorithms, and methods geared towards applications in architecture and engineering;
-*   A basic Java/Processing base with basic building components developed using IGEO
 *   Interoperability with Java code and libraries such as IGEO, Ladybug, Honeybee;
 *   Geometry processing indepedent of CAD tools.
 *   Methods and solvers for numerical computation built around NumPy and SciPy.
