@@ -3,7 +3,7 @@ layout: default
 ---
 
 
-**Atopo** is an open-source, Python-based computational framework for collaboration and research in architecture, engineering and digital fabrication. It is developed by Schemalab (https://schemalab.usc.edu) of University of Southern California (http://www.usc.edu), with the support of the National Science Fun
+**Atopo** is an open-source, Python-based computational framework for collaboration and research in architecture, engineering and digital fabrication. It is developed by Schemalab (https://schemalab.usc.edu) of University of Southern California (https://www.usc.edu), with the support of the National Science Foundation (https://www.nsf.gov/)
 
 The main contributors are:
 
@@ -13,17 +13,51 @@ Alan Wang
 
 
 
-Text can be **bold**, _italic_, or ~~strikethrough~~.
+<!-- Text can be **bold**, _italic_, or ~~strikethrough~~.
 
 [Link to another page](./another-page.html).
 
 There should be whitespace between paragraphs.
 
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
+There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project. -->
 
 # Features
 
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
+*   A basic Python base with flexible datastructures, algorithms, and methods geared towards applications in architecture and engineering;
+*   A basic Java/Processing base with basic building components developed using IGEO
+*   Interoperability with Java code and libraries such as IGEO, Ladybug, Honeybee;
+*   Geometry processing indepedent of CAD tools.
+*   Methods and solvers for numerical computation built around NumPy and SciPy.
+*   Plotters and viewers for two-dimensional and basic three-dimensional visualization; and
+*   Interfaces to common CAD software (Rhinoceros 3d) and Visual Programming Editors (Grasshopper).
+
+
+# Multi-disciplinary research
+
+
+Architecture is a highly multidisciplinary field, combining research from the fields of design, environmental and structural and engineeering as well as computer science, robotics, mathematics, automation. The target audience of the ATOPO framework is therefore very diverse but mainly focuses on designers that are interested in informing their design decisions using analytical data
+
+To deal with the different academic backgrounds, programming skills, computational experience, and best/accepted practices of its users and their respective fields, ATOPO is implemented primarily in Python Java/Processing. 
+It designed to be entirely independent of the functionality of CAD software, but can generate geometry which is compatible with diverse commercial software. As a result, it can be used on different platforms and in combination with external software and libraries, and at the same time take advantage of the various scientific and non-scientific libraries available in the Python ecosystem itself. 
+Additionally, and perhaps more importantly,ATOPO is not tied to a specific CAD-based ecosystem but it allows users to develop and implement their own processes at a higher level.
+
+
+# Public, Private, Shared
+
+ATOPO is divided into a main library and a pool of user-contributed research packages. The main library is entirely open source and subject to the MIT license. 
+The user-contributed packages are released with access levels defined by the respective authors. They can be private, public, or shared with a specific group of users.
+
+
+# Additional packages
+
+The additional packages supplement the main library with functionality related to specialised topics. These packages can be related to ongoing or completed research, or simply provide additional functionality, as a service to other users. 
+For an overview of available packages, see https://compas-dev.github.io/packages/.
+
+
+
+# Links
+<!-- 
+
 
 ## Header 2
 
@@ -131,4 +165,4 @@ Long, single-line code blocks should not wrap. They should horizontally scroll i
 
 ```
 The final element.
-```
+``` -->
